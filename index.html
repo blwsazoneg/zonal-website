@@ -18,80 +18,99 @@
     />
     <!-- Custom CSS -->
     <style>
-      /* Custom navbar styles with clean transparency */
-      .navbar-custom {
-        background-color: transparent !important;
-        transition: all 0.3s ease-in-out;
-        padding: 0.5rem 0;
-        min-height: 60px;
+      .footer-links li {
+        transition: transform 0.2s;
       }
 
-      .navbar-custom.scrolled {
-        background-color: rgba(26, 26, 26, 0.95) !important;
-        padding: 0.3rem 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      .footer-links li:hover {
+        transform: translateX(5px);
       }
 
-      .navbar-custom .navbar-brand {
-        padding: 0;
-      }
-
-      .navbar-custom .navbar-brand img {
-        height: 80px;
-        width: auto;
-      }
-
-      .navbar-custom .navbar-nav .nav-link {
-        color: white !important;
-        font-weight: 500;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-      }
-
-      .navbar-custom .nav-link:hover {
+      .hover-gold:hover {
         color: #ffc107 !important;
       }
 
-      .navbar-custom .navbar-brand {
-        filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.7));
+      .social-links a {
+        font-size: 1.2rem;
+        transition: all 0.3s;
       }
 
-      /* Hamburger menu styling */
+      .social-links a:hover {
+        transform: translateY(-3px);
+        color: #ffc107 !important;
+      }
+      /* Navbar - Transparent by default */
+      .navbar-overlay {
+        background: transparent;
+        padding: 15px 0;
+        width: 100%;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        position: absolute; /* Changed from relative */
+        top: 0;
+        left: 0;
+      }
+
+      .navbar-brand {
+        padding: 0;
+        height: 60px;
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar-brand img {
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+      }
+
+      .nav-link {
+        margin: 0 10px;
+        position: relative;
+        color: white !important;
+      }
+
+      .nav-link:after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: white;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover:after {
+        width: 100%;
+      }
+
       .navbar-toggler {
-        padding: 0.25rem 0.5rem;
-        font-size: 1rem;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        background-color: rgba(0, 0, 0, 0.3);
+        border-color: rgba(255, 255, 255, 0.5) !important;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+      }
+
+      /* Mobile Menu Behavior */
+      @media (max-width: 992px) {
+        .navbar-collapse {
+          background: rgba(0, 0, 0, 0.9) !important;
+          backdrop-filter: blur(10px);
+          margin: 10px -15px 0 -15px;
+          padding: 15px;
+          border-radius: 0 0 10px 10px;
+        }
+
+        /* Dark background when hamburger is clicked */
+        .navbar-overlay.show-mobile-menu {
+          background: rgba(0, 0, 0, 0.9) !important;
+        }
       }
 
       .navbar-toggler:focus {
-        box-shadow: 0 0 0 0.1rem rgba(255, 255, 255, 0.25);
-      }
-
-      /* Mobile menu adjustments */
-      @media (max-width: 991.98px) {
-        .navbar-custom {
-          padding: 0.5rem 1rem;
-        }
-
-        .navbar-collapse {
-          background: rgba(26, 26, 26, 0.95);
-          border-radius: 0.5rem;
-          padding: 1rem;
-          margin-top: 0.5rem;
-          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar-nav .nav-item {
-          margin: 0.5rem 0 !important;
-        }
-
-        .navbar-nav .btn {
-          display: inline-block;
-          width: auto;
-          text-align: center;
-        }
+        box-shadow: none !important;
       }
 
       /* Social Media Side Panel - Hero Section Only */
@@ -459,93 +478,65 @@
       }
 
       /* PROGRAMS SECTION - ARCHED SLIDESHOW WITH IMAGE CARDS */
-      /* PROGRAMS SECTION - ARCHED SLIDESHOW WITH IMAGE CARDS */
-      .programs-section {
-        padding: 4rem 0;
-        background-color: #f8f9fa;
-        /* Removed overflow: hidden from here, moved to .program-section for better control */
-      }
-
-      .programs-section h1 {
-        color: #333333;
-        text-align: center;
-        margin-bottom: 3rem;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 700;
-        font-size: 3rem;
-      }
-
-      .programs-section p.lead {
-        text-align: center;
-        margin-bottom: 2rem;
-        color: #666;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* Updated Program Section Container */
-      .program-section {
-        /* This is the new arch-container equivalent */
+      /* ARCHED PROGRAMS SECTION */
+      .arch-container {
         width: 100%;
-        height: 400px; /* Adjust height as needed */
+        height: 350px;
         position: relative;
-        overflow: hidden; /* Crucial for the continuous scroll effect and hiding cards outside bounds */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        overflow: hidden;
         margin: 3rem auto;
         max-width: 1200px;
-        perspective: 1000px; /* Needed for 3D transforms on children */
-
-        /* Simulate the curved top and bottom edges with border-radius */
-        border-top-left-radius: 20% 50px; /* Adjust for desired curvature */
-        border-top-right-radius: 20% 50px;
-        border-bottom-left-radius: 20% 50px;
-        border-bottom-right-radius: 20% 50px;
-        background-color: #f8f9fa; /* Background for the section itself, similar to outer section */
-        box-shadow: inset 0 50px 50px -50px rgba(0, 0, 0, 0.2),
-          inset 0 -50px 50px -50px rgba(0, 0, 0, 0.2); /* Your existing shadow */
+        perspective: 1000px;
       }
 
-      /* Remove ::before and ::after pseudo-elements from here as they conflict with new structure */
-      /* The border-radius on .program-section now handles the curve visually */
-
-      /* Slideshow track */
-      .program-container {
-        /* This is the new arch-slideshow-track equivalent */
+      .arch-slideshow-track {
         display: flex;
         position: absolute;
         height: 100%;
-        /* No animation here; controlled by JS */
-        transform-style: preserve-3d; /* Allows 3D transforms on children */
-        left: 0; /* Important for initial positioning */
+        animation: scroll 40s linear infinite;
+        transform-style: preserve-3d;
       }
 
-      /* Program cards with images */
-      .program-card {
-        /* This is the new arch-program-card equivalent */
-        width: 300px; /* Adjust card width */
-        height: 350px; /* Adjust card height */
-        margin: 25px 15px; /* Spacing between cards */
+      .arch-program-card {
+        width: 280px;
+        height: 350px;
+        margin: 0 15px;
         border-radius: 15px;
         position: relative;
         overflow: hidden;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        /* Transition for smooth JavaScript applied transforms */
         transition: transform 0.1s linear, opacity 0.1s linear;
-        flex-shrink: 0; /* Prevent cards from shrinking */
-        transform-origin: center bottom; /* For perspective effect controlled by JS */
+        flex-shrink: 0;
+        transform-origin: center bottom;
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
-        display: flex; /* To align content inside */
-        flex-direction: column; /* To align content inside */
-        justify-content: flex-end; /* To push content to the bottom */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+
+      /* Apply arch shape to cards */
+      .arch-slideshow-track:hover {
+        animation-play-state: paused;
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* Apply 3D arch effect */
+      .arch-program-card {
+        transform: rotateY(0deg) translateZ(0);
+        transition: transform 0.5s ease;
       }
 
       /* Background images for each card */
-      .program-card.healing-streams {
+      .healing-streams {
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.7)
@@ -553,7 +544,7 @@
           url("media/hslhs.png");
       }
 
-      .program-card.rhapsody {
+      .rhapsody {
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.7)
@@ -561,7 +552,7 @@
           url("media/ror.png");
       }
 
-      .program-card.inner-city {
+      .inner-city {
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.7)
@@ -569,7 +560,7 @@
           url("media/ic.png");
       }
 
-      .program-card.loveworld-tv {
+      .loveworld-tv {
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.7)
@@ -577,7 +568,7 @@
           url("media/lwsat.png");
       }
 
-      .program-card.loveworld-radio {
+      .loveworld-radio {
         background-image: linear-gradient(
             rgba(0, 0, 0, 0.4),
             rgba(0, 0, 0, 0.7)
@@ -585,11 +576,7 @@
           url("media/lr.png");
       }
 
-      /* Remove static transforms on nth-child, JavaScript will handle this dynamically */
-      /* .arch-program-card:nth-child(1) { transform: perspective(800px) rotateY(25deg) rotateX(10deg) translateZ(-50px); } */
-      /* ... and so on for other nth-child rules ... */
-
-      /* Text overlay - keep as is */
+      /* Card content styling */
       .arch-card-content {
         position: absolute;
         bottom: 0;
@@ -619,33 +606,58 @@
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
       }
 
-      /* Remove the @keyframes archSlide as JS will control movement */
-      /* @keyframes archSlide { ... } */
-
-      /* Remove pause animation on hover as JS will control movement */
-      /* .arch-container:hover .arch-slideshow-track { animation-play-state: paused; } */
-
-      /* Keep enhanced arch shadow effects, now on .program-section */
-      /* .arch-container { ... } */
-
       /* Responsive adjustments */
-      @media (max-width: 768px) {
-        /* ... your existing rules ... */
-
-        .program-card {
-          width: 240px; /* Your existing rule */
-          height: 240px; /* Your existing rule */
+      @media (max-width: 992px) {
+        .arch-container {
+          height: 450px;
         }
-        /* Remove program-content as it's now arch-card-content */
-        /* .program-content h3 { ... } */
-        /* .program-content p { ... } */
+
+        .arch-program-card {
+          width: 240px;
+          height: 300px;
+        }
       }
 
-      @media (max-width: 480px) {
-        /* ... your existing rules ... */
-        .program-card {
-          width: 220px; /* Your existing rule */
-          height: 220px; /* Your existing rule */
+      @media (max-width: 768px) {
+        .arch-container {
+          height: 400px;
+        }
+
+        .arch-program-card {
+          width: 220px;
+          height: 280px;
+          margin: 0 10px;
+        }
+
+        .arch-card-content {
+          padding: 1.5rem;
+        }
+
+        .arch-card-content h3 {
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .arch-container {
+          height: 350px;
+        }
+
+        .arch-program-card {
+          width: 200px;
+          height: 250px;
+        }
+
+        .arch-card-content {
+          padding: 1rem;
+        }
+
+        .arch-card-content h3 {
+          font-size: 1.1rem;
+        }
+
+        .arch-card-content p {
+          font-size: 0.85rem;
         }
       }
 
@@ -961,45 +973,345 @@
           height: 18px;
         }
       }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        color: white;
+        margin: 0;
+      }
+
+      /* Scroll behavior */
+      .scrolled {
+        background: rgba(0, 0, 0, 0.9) !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        position: fixed; /* Makes navbar stick when scrolling */
+      }
+
+      /* Active Navbar Tab Styling */
+      .navbar-overlay .nav-item .nav-link.active {
+        position: relative;
+        font-weight: 600;
+      }
+
+      .navbar-overlay .nav-item .nav-link.active:after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: white;
+        animation: underline 0.3s ease-out;
+      }
+
+      @keyframes underline {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      /* Mobile Active State */
+      @media (max-width: 992px) {
+        .navbar-overlay .nav-item .nav-link.active {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 4px;
+        }
+
+        .navbar-overlay .nav-item .nav-link.active:after {
+          display: none;
+        }
+      }
+
+      /* MESSAGES UPLOADED SECTION */
+      .gallery-container {
+        position: relative;
+        /* max-width: 800px; */
+        /* margin: 0 auto; */
+        overflow: hidden;
+        padding: 0 4rem;
+        /* border-radius: 1rem; */
+      }
+
+      .gallery-scroll {
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.5s ease;
+      }
+
+      .gallery-item {
+        width: 100%;
+        flex-shrink: 0;
+        /* height: 600px;  */
+        display: none; /* Hide all by default */
+      }
+
+      .gallery-item.active {
+        display: block; /* Only show active item */
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 1rem !important;
+      }
+
+      .nav-buttons {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        z-index: 10;
+      }
+
+      .nav-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: goldenrod;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .nav-btn:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .nav-btn i {
+        font-size: 1.2rem;
+        color: #000;
+      }
+
+      /* Hero Carousel - Namespaced with blw- prefix */
+      .blw-hero-carousel {
+        height: 100vh;
+        min-height: 600px;
+        position: relative;
+        overflow: hidden;
+        margin-top: 0;
+      }
+
+      .blw-carousel-inner {
+        height: 100%;
+      }
+
+      .blw-carousel-item {
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 1s ease-in-out;
+      }
+
+      .blw-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .blw-content-container {
+        position: relative;
+        z-index: 2;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding: 0 5%;
+        padding-top: 80px; /* Space for navbar */
+      }
+
+      /* Carousel Indicators */
+      .blw-carousel-indicators {
+        bottom: 30px;
+        z-index: 3;
+        margin: 0;
+        padding: 0 15px;
+        justify-content: flex-end;
+      }
+
+      .blw-carousel-indicators [data-bs-target] {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin: 0 5px !important;
+        border: 1px solid white;
+        background: transparent;
+        opacity: 0.7;
+        transition: all 0.3s ease;
+      }
+
+      .blw-carousel-indicators .active {
+        background: white !important;
+        opacity: 1 !important;
+      }
+
+      /* Text and Image Content */
+      .blw-text-content {
+        max-width: 60%;
+        padding-right: 30px;
+      }
+
+      .blw-image-content {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 5%;
+      }
+
+      .blw-image-content img {
+        max-height: 70vh;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+
+      .btn-outline-custom {
+        color: white;
+        border-color: white;
+      }
+
+      .btn-outline-custom:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 992px) {
+        .blw-content-container {
+          flex-direction: column;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .blw-text-content {
+          max-width: 100%;
+          padding-right: 0;
+          margin-bottom: 30px;
+        }
+
+        .blw-image-content {
+          justify-content: center;
+          padding-right: 0;
+        }
+
+        .blw-image-content img {
+          max-width: 80%;
+          max-height: 20vh;
+        }
+
+        .blw-carousel-indicators {
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .blw-hero-carousel {
+          min-height: 700px;
+        }
+      }
+
+      /* Other page styles */
+      .blw-card {
+        background-color: gray !important;
+        color: white !important;
+      }
+
+      .blw-image-container {
+        position: relative;
+        background-image: url("media/congregation.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        border-radius: 0.5rem;
+      }
+
+      .blw-overlay-text {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 2rem 3rem;
+        border-radius: 0.5rem;
+        text-align: center;
+        max-width: 80%;
+        border: 0.2rem solid white;
+      }
+
+      @media (max-width: 768px) {
+        .blw-overlay-text {
+          padding: 1.5rem 1.5rem;
+          max-width: 90%;
+        }
+
+        .blw-image-container {
+          min-height: 300px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .blw-overlay-text {
+          padding: 1rem;
+          max-width: 95%;
+        }
+
+        .blw-image-container {
+          min-height: 250px;
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- Navigation -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark fixed-top navbar-custom"
-      id="mainNavbar"
-    >
+    <!-- Transparent Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-overlay">
       <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="media/download.png" alt="logo" class="img-fluid" />
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="media/download.png"
+            alt="logo"
+            width="80"
+            class="img-fluid"
+          />
         </a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item me-lg-5">
-              <a class="nav-link" href="#">Home</a>
+              <a class="nav-link" href="index.html">Home</a>
             </li>
             <li class="nav-item me-lg-5">
-              <a class="nav-link" href="#">News</a>
+              <a class="nav-link" href="news.html">News</a>
             </li>
             <li class="nav-item me-lg-5">
-              <a class="nav-link" href="#">Programs</a>
+              <a class="nav-link" href="programs.html">Programs</a>
             </li>
             <li class="nav-item me-lg-5">
-              <a class="nav-link" href="#">Messages</a>
+              <a class="nav-link" href="messages.html">Messages</a>
             </li>
             <li class="nav-item me-lg-5">
-              <a class="btn btn-warning text-white" href="#">Live Service</a>
+              <a class="btn btn-warning text-white" href="live-service.html"
+                >Live Service</a
+              >
             </li>
           </ul>
         </div>
@@ -1011,8 +1323,12 @@
       <!-- Social Media Side Panel -->
       <div class="social-panel" id="socialPanel">
         <!-- Custom Logo with Blue Background -->
-        <a href="#" class="social-icon custom-logo" title="Our Website">
-          <img src="media/kc.png" alt="Custom Logo" />
+        <a
+          href="index.html"
+          class="social-icon custom-logo"
+          title="Our Website"
+        >
+          <img src="media/kc.png" alt="BLW SA Zone G Logo" />
         </a>
         <!-- Instagram Icon -->
         <a href="#" class="social-icon instagram" title="Instagram">
@@ -1084,10 +1400,13 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 my-auto">
-            <h1 class="fw-bold text-center mb-3" style="font-size: 3rem">
+            <h1
+              class="fw-bold text-black text-center mb-3"
+              style="font-size: 3rem"
+            >
               Our Vision
             </h1>
-            <p class="lead" style="text-align: justify">
+            <p class="lead text-black" style="text-align: justify">
               To take the divine presence of God to the nations and peoples of
               the world; and to demonstrate the character of the Spirit. To
               raise generations of men and women who will come into their
@@ -1104,9 +1423,11 @@
 
     <!-- Programs Section - ARCHED SLIDESHOW WITH IMAGE CARDS -->
     <section class="programs-section" id="programs">
-      <div class="">
-        <h1 class="fw-bold text-center mb-3">Our Partnership Arms</h1>
-        <p class="lead mb-3">
+      <div class="container">
+        <h1 class="fw-bold text-black text-center mb-3" style="font-size: 3rem">
+          Our Partnership Arms
+        </h1>
+        <p class="text-center text-black lead mb-3">
           Join the global mission. Your partnership makes a difference, changing
           lives globally through strategic kingdom partnerships.
         </p>
@@ -1117,9 +1438,10 @@
         </p>
       </div>
 
-      <div class="program-section">
-        <div class="program-container">
-          <div class="program-card healing-streams">
+      <div class="arch-container">
+        <div class="arch-slideshow-track">
+          <!-- Program Cards (duplicated for seamless looping) -->
+          <div class="arch-program-card healing-streams">
             <div class="arch-card-content">
               <h3>Healing Streams</h3>
               <p>
@@ -1129,7 +1451,7 @@
             </div>
           </div>
 
-          <div class="program-card rhapsody">
+          <div class="arch-program-card rhapsody">
             <div class="arch-card-content">
               <h3>Rhapsody Of Realities</h3>
               <p>
@@ -1139,7 +1461,7 @@
             </div>
           </div>
 
-          <div class="program-card inner-city">
+          <div class="arch-program-card inner-city">
             <div class="arch-card-content">
               <h3>Inner City Mission</h3>
               <p>
@@ -1149,7 +1471,7 @@
             </div>
           </div>
 
-          <div class="program-card loveworld-tv">
+          <div class="arch-program-card loveworld-tv">
             <div class="arch-card-content">
               <h3>LoveWorld Television</h3>
               <p>
@@ -1159,14 +1481,15 @@
             </div>
           </div>
 
-          <div class="program-card loveworld-radio">
+          <div class="arch-program-card loveworld-radio">
             <div class="arch-card-content">
               <h3>LoveWorld Radio</h3>
               <p>Broadcast God's word via radio to millions globally.</p>
             </div>
           </div>
 
-          <div class="program-card healing-streams">
+          <!-- Duplicate cards for seamless looping -->
+          <div class="arch-program-card healing-streams">
             <div class="arch-card-content">
               <h3>Healing Streams</h3>
               <p>
@@ -1176,7 +1499,7 @@
             </div>
           </div>
 
-          <div class="program-card rhapsody">
+          <div class="arch-program-card rhapsody">
             <div class="arch-card-content">
               <h3>Rhapsody Of Realities</h3>
               <p>
@@ -1186,7 +1509,7 @@
             </div>
           </div>
 
-          <div class="program-card inner-city">
+          <div class="arch-program-card inner-city">
             <div class="arch-card-content">
               <h3>Inner City Mission</h3>
               <p>
@@ -1196,7 +1519,7 @@
             </div>
           </div>
 
-          <div class="program-card loveworld-tv">
+          <div class="arch-program-card loveworld-tv">
             <div class="arch-card-content">
               <h3>LoveWorld Television</h3>
               <p>
@@ -1206,7 +1529,7 @@
             </div>
           </div>
 
-          <div class="program-card loveworld-radio">
+          <div class="arch-program-card loveworld-radio">
             <div class="arch-card-content">
               <h3>LoveWorld Radio</h3>
               <p>Broadcast God's word via radio to millions globally.</p>
@@ -1217,11 +1540,17 @@
     </section>
 
     <!-- Redesigned News Section -->
-    <section class="news-section" id="news">
+    <section class="news-section mb-4" id="news">
       <div class="container">
-        <h1 class="fw-bold text-center mb-4">Latest News</h1>
+        <h1 class="fw-bold text-center text-black mb-4">News</h1>
+        <p class="text-center text-black lead mb-3">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+          molestias odio ratione reprehenderit porro. Sed ipsa, non ipsum cumque
+          reiciendis placeat debitis molestiae nobis maxime perspiciatis unde,
+          repellat esse eos.
+        </p>
 
-        <div class="news-container">
+        <div class="news-container my-4">
           <div
             id="newsCarousel"
             class="carousel slide news-carousel"
@@ -1341,7 +1670,7 @@
               <!-- News Item 3 -->
               <div
                 class="carousel-item"
-                style="background-image: url('media/thumbnails/iclc.png')"
+                style="background-image: url('media/iclc.png')"
               >
                 <div class="news-content-wrapper">
                   <div class="news-category">Conference</div>
@@ -1415,34 +1744,450 @@
             </button>
           </div>
         </div>
+
+        <div class="d-flex justify-content-center">
+          <a href="news.html" class="btn btn-warning fw-bold text-white"
+            >View News</a
+          >
+        </div>
       </div>
     </section>
+
+    <!-- Messages Uploaded -->
+    <section>
+      <div>
+        <h1 class="fw-bold text-center text-black mb-4">Messages</h1>
+        <p class="container text-center text-black lead mb-3">
+          This message will stir your faith and ignite your spirit, bring forth
+          fresh revelation, divine insight - Experience the power of God's Word
+          today.
+        </p>
+      </div>
+      <div style="background-color: gainsboro" class="p-3">
+        <div class="gallery-container">
+          <div class="gallery-scroll" id="galleryScroll">
+            <div class="gallery-item active">
+              <img
+                src="media/thumbnails/Camp Complete.png"
+                alt="CC thumbnail"
+                class="img-fluid rounded"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="media/thumbnails/Do Not Turn Away.png"
+                alt="message thumbnail"
+                class="img-fluid rounded"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="media/thumbnails/One Thing is Needful.png"
+                alt="message thumbnail"
+                class="img-fluid rounded"
+              />
+            </div>
+            <div class="gallery-item">
+              <img
+                src="media/thumbnails/Part of His domestics.png"
+                alt="message thumbnail"
+                class="img-fluid rounded"
+              />
+            </div>
+          </div>
+
+          <div class="nav-buttons">
+            <button class="nav-btn" id="prevBtn">
+              <i class="fas fa-chevron-up"></i>
+            </button>
+            <button class="nav-btn" id="nextBtn">
+              <i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-center">
+          <a href="messages.html" class="btn btn-warning fw-bold">View More</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Streams -->
+    <section>
+      <div class="my-5">
+        <h1 class="fw-bold text-center text-black mb-4">Upcoming Streams</h1>
+        <p class="container text-center text-black lead mb-3">
+          Stay connected and be part of our powerful upcoming evernts designed
+          to equip, inspireand transform lives.
+        </p>
+        <!-- Hero Carousel with namespaced classes -->
+        <div
+          id="blwHeroCarousel"
+          class="carousel slide blw-hero-carousel"
+          data-bs-ride="carousel"
+          data-bs-interval="4000"
+          data-bs-pause="hover"
+        >
+          <!-- Indicators -->
+          <div class="carousel-indicators blw-carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#blwHeroCarousel"
+              data-bs-slide-to="0"
+              class="active"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#blwHeroCarousel"
+              data-bs-slide-to="1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#blwHeroCarousel"
+              data-bs-slide-to="2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#blwHeroCarousel"
+              data-bs-slide-to="3"
+            ></button>
+          </div>
+
+          <div class="carousel-inner blw-carousel-inner">
+            <!-- Slide 1 -->
+            <div
+              class="carousel-item blw-carousel-item active"
+              style="background-image: url('media/iclc.png')"
+            >
+              <div class="blw-overlay"></div>
+              <div class="blw-content-container container">
+                <div class="blw-text-content">
+                  <h1>
+                    International Cell Leader's Conference with Pastor Chris
+                  </h1>
+                  <p>
+                    Cell Leaders and Cell Executives from different nations of
+                    the world are expected to converge on the LoveWorld Crusade
+                    Grounds, along Lagos-Ibadan Expressway, Southwest Nigeria
+                    for the epochal conference.
+                  </p>
+                  <button class="btn btn-outline-custom btn-custom">
+                    Read More
+                  </button>
+                </div>
+                <div class="blw-image-content">
+                  <img
+                    src="media/pc-iclc.png"
+                    class="img-fluid rounded"
+                    alt="Pastor Chris"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div
+              class="carousel-item blw-carousel-item"
+              style="background-image: url('media/praise_night.png')"
+            >
+              <div class="blw-overlay"></div>
+              <div class="blw-content-container container">
+                <div class="blw-text-content">
+                  <h1>Praise Night with Pastor Chris</h1>
+                  <p>
+                    It will be a time of heartfelt praise, the Word & moments of
+                    Inspiration.Don't miss it, spread the message. Invite others
+                    to watch and participate in this Praise Night Service.
+                  </p>
+                  <button class="btn btn-outline-custom btn-custom">
+                    Read More
+                  </button>
+                </div>
+                <div class="blw-image-content">
+                  <img
+                    src="media/pc-praise.png"
+                    class="img-fluid rounded"
+                    alt="Pastor Chris"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div
+              class="carousel-item blw-carousel-item"
+              style="background-image: url('media/hslhs-news.png')"
+            >
+              <div class="blw-overlay"></div>
+              <div class="blw-content-container container">
+                <div class="blw-text-content">
+                  <h1>
+                    Healing Streams Live Healing Services with Pastor Chris
+                  </h1>
+                  <p>
+                    The Healing Streams Live Healing Services is a special
+                    online program designed by the Holy Spirit to bring divine
+                    healing to everyone that requires healing for their bodies.
+                  </p>
+                  <button class="btn btn-outline-custom btn-custom">
+                    Read More
+                  </button>
+                </div>
+                <div class="blw-image-content">
+                  <img
+                    src="media/pc-hslhs.png"
+                    class="img-fluid rounded"
+                    alt="Pastor Chris"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div
+              class="carousel-item blw-carousel-item"
+              style="background-image: url('media/ippc.png')"
+            >
+              <div class="blw-overlay"></div>
+              <div class="blw-content-container container">
+                <div class="blw-text-content">
+                  <h1>
+                    International Pastors And Partners Conference With Pastor
+                    Chris
+                  </h1>
+                  <p>
+                    The International Pastors' and Partners' Conference (IPPC)
+                    2025 is a glorious gathering of stakeholders in the
+                    Loveworld Nation held especially to celebrate our partners,
+                    a celebration of our victories, joys, successes, conquests,
+                    accomplishments, coups, and feats.
+                  </p>
+                  <button class="btn btn-outline-custom btn-custom">
+                    Read More
+                  </button>
+                </div>
+                <div class="blw-image-content">
+                  <img
+                    src="media/pc-ippc.png"
+                    class="img-fluid rounded"
+                    alt="Pastor Chris"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <!-- Content Section -->
+      <div class="container py-5">
+        <!-- Join Our Church Service Online -->
+        <div class="blw-image-container mt-4">
+          <div class="blw-overlay-text">
+            <h1 class="text-warning fw-bold">Join Our Church Service Online</h1>
+            <p>
+              The presence and manifestation of God's power can be experienced
+              anywhere as long as you are connected to the right source. We are
+              LIVE every Thursday evening and Sunday morning.
+            </p>
+            <a href="#" class="btn btn-warning fw-bold">Join Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-black text-white py-5">
+      <div class="container">
+        <div class="row g-4">
+          <!-- Logo and Contact Column -->
+          <div class="col-lg-3 col-md-6">
+            <div class="d-flex flex-column h-100">
+              <img
+                src="media/download.png"
+                alt="BLW SA Zone G DSP Logo"
+                class="img-fluid mb-4"
+                width="120"
+              />
+              <div class="mt-auto">
+                <p class="mb-2 fw-bold">
+                  <i class="fas fa-phone-alt me-2"></i> +27 73 490 7149
+                </p>
+                <p class="mb-0">
+                  <i class="fas fa-envelope me-2"></i> info@blwsazonegdsp.org
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Links Column -->
+          <div class="col-lg-3 col-md-6">
+            <h3 class="h5 mb-4 text-warning">Quick Links</h3>
+            <ul class="list-unstyled footer-links">
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none hover-gold"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none hover-gold"
+                  >Cookie Policy</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://rhapsodyofrealities.org"
+                  class="text-white text-decoration-none hover-gold"
+                  >Rhapsody of Realities</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://enterthehealingschool.org"
+                  class="text-white text-decoration-none hover-gold"
+                  >Healing School</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://pcdl.co"
+                  class="text-white text-decoration-none hover-gold"
+                  >Pastor Chris Digital Library</a
+                >
+              </li>
+              <li class="mb-2">
+                <a
+                  href="https://loveworldsat.org"
+                  class="text-white text-decoration-none hover-gold"
+                  >Loveworld SAT</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Online Column -->
+          <div class="col-lg-3 col-md-6">
+            <h3 class="h5 mb-4 text-warning">Online</h3>
+            <ul class="list-unstyled footer-links">
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none hover-gold"
+                  >Live Service</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none hover-gold"
+                  >Watch Online</a
+                >
+              </li>
+              <li class="mb-2">
+                <a href="#" class="text-white text-decoration-none hover-gold"
+                  >Podcasts</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Newsletter Column -->
+          <div class="col-lg-3 col-md-6">
+            <h3 class="h5 mb-4 text-warning">Subscribe</h3>
+            <p class="mb-3">Stay updated with our latest news and events</p>
+            <form class="mb-4">
+              <div class="input-group">
+                <input
+                  type="email"
+                  class="form-control bg-dark text-white border-secondary"
+                  placeholder="Your email"
+                  required
+                />
+                <button class="btn btn-warning text-dark fw-bold" type="submit">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+            <div class="social-links">
+              <a href="#" class="text-white me-3 hover-gold"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-white me-3 hover-gold"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-white me-3 hover-gold"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-white me-3 hover-gold"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="my-4 border-secondary" />
+
+        <!-- Copyright -->
+        <div class="text-center pt-3">
+          <p class="mb-0">
+            &copy; 2025 BLW SA Zone G DSP Technical Department. All rights
+            reserved
+          </p>
+          <p class="small mt-2">
+            <a href="#" class="text-white-50 text-decoration-none hover-gold"
+              >Terms of Use</a
+            >
+            |
+            <a href="#" class="text-white-50 text-decoration-none hover-gold"
+              >Privacy Policy</a
+            >
+          </p>
+        </div>
+      </div>
+    </footer>
 
     <!-- Bootstrap JavaScript -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JavaScript -->
     <script>
-      // Navbar scroll effect
-      window.addEventListener("scroll", function () {
-        const navbar = document.getElementById("mainNavbar");
-        if (window.scrollY > 50) {
-          navbar.classList.add("scrolled");
-        } else {
-          navbar.classList.remove("scrolled");
-        }
-      });
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector(".navbar-overlay");
+        const navbarToggler = document.querySelector(".navbar-toggler");
 
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-          const target = document.querySelector(this.getAttribute("href"));
-          if (target) {
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
+        // Mobile menu state tracking
+        navbarToggler.addEventListener("click", function () {
+          if (this.getAttribute("aria-expanded") === "true") {
+            navbar.classList.add("show-mobile-menu");
+          } else {
+            navbar.classList.remove("show-mobile-menu");
+          }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll(".nav-link").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (window.innerWidth <= 992) {
+              navbar.classList.remove("show-mobile-menu");
+              const bsCollapse = new bootstrap.Collapse(
+                document.querySelector(".navbar-collapse"),
+                {
+                  toggle: false,
+                }
+              );
+              bsCollapse.hide();
+            }
+          });
+        });
+
+        // Scroll behavior
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("scrolled");
+          } else {
+            navbar.classList.remove("scrolled");
+
+            // Only remove mobile menu background if not expanded
+            if (navbarToggler.getAttribute("aria-expanded") !== "true") {
+              navbar.classList.remove("show-mobile-menu");
+            }
           }
         });
       });
@@ -1462,15 +2207,178 @@
       const newsCarousel = new bootstrap.Carousel(
         document.getElementById("newsCarousel"),
         {
-          interval: 6000, // 6 seconds per slide
+          interval: 4000, // 6 seconds per slide
           wrap: true, // Loop continuously
           pause: "hover", // Pause on hover
           touch: true, // Enable swiping
         }
       );
 
+      document.addEventListener("DOMContentLoaded", function () {
+        // Set active tab based on current page
+        const currentPage = location.pathname.split("/").pop() || "index.html";
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        navLinks.forEach((link) => {
+          const linkPage = link.getAttribute("href").split("/").pop();
+          if (currentPage === linkPage) {
+            link.classList.add("active");
+
+            // For dropdown menus (if you add them later)
+            const dropdown = link.closest(".dropdown-menu");
+            if (dropdown) {
+              dropdown.previousElementSibling.classList.add("active");
+            }
+          }
+
+          // Add click handler to update active state
+          link.addEventListener("click", function () {
+            navLinks.forEach((navLink) => navLink.classList.remove("active"));
+            this.classList.add("active");
+
+            // For mobile - close menu after selection
+            if (window.innerWidth <= 992) {
+              const navbarCollapse = bootstrap.Collapse.getInstance(
+                document.querySelector(".navbar-collapse")
+              );
+              if (navbarCollapse) {
+                navbarCollapse.hide();
+              }
+            }
+          });
+        });
+
+        // Special case for live service button
+        const liveServiceBtn = document.querySelector(".nav-item .btn");
+        if (liveServiceBtn && currentPage === "live-service.html") {
+          liveServiceBtn.classList.add("active");
+          liveServiceBtn.classList.remove("btn-warning");
+          liveServiceBtn.classList.add("btn-light");
+        }
+      });
+
       // Remove the old programs grid auto-scroll code and replace with:
       // The arch slideshow uses pure CSS animation, no additional JavaScript needed for basic functionality
+      // Enhanced JavaScript for arched programs section
+      document.addEventListener("DOMContentLoaded", function () {
+        const track = document.querySelector(".arch-slideshow-track");
+        const cards = document.querySelectorAll(".arch-program-card");
+        const container = document.querySelector(".arch-container");
+
+        // Clone cards for infinite loop
+        if (cards.length > 0) {
+          const cloneCount =
+            Math.ceil(window.innerWidth / cards[0].offsetWidth) + 1;
+          for (let i = 0; i < cloneCount; i++) {
+            cards.forEach((card) => {
+              track.appendChild(card.cloneNode(true));
+            });
+          }
+        }
+
+        // Apply 3D arch effect
+        function applyArchEffect() {
+          const cards = document.querySelectorAll(".arch-program-card");
+          const center = container.offsetWidth / 2;
+          const maxAngle = 30; // Maximum rotation angle
+          const maxHeight = 80; // Maximum height adjustment
+
+          cards.forEach((card, index) => {
+            const rect = card.getBoundingClientRect();
+            const cardCenter = rect.left + rect.width / 2;
+            const distanceFromCenter = (cardCenter - center) / center;
+
+            // Apply rotation and height based on position
+            const rotation = maxAngle * distanceFromCenter;
+            const heightAdjust = maxHeight * (1 - Math.abs(distanceFromCenter));
+
+            card.style.transform = `rotateY(${rotation}deg) translateY(${-heightAdjust}px)`;
+            card.style.zIndex = Math.round(
+              100 - Math.abs(distanceFromCenter * 100)
+            );
+            card.style.opacity = 1 - Math.abs(distanceFromCenter) * 0.3;
+          });
+        }
+
+        // Reapply effect on scroll and resize
+        container.addEventListener("scroll", applyArchEffect);
+        window.addEventListener("resize", applyArchEffect);
+
+        // Initialize
+        applyArchEffect();
+
+        // Auto-scroll
+        let scrollSpeed = 1;
+        function autoScroll() {
+          container.scrollLeft += scrollSpeed;
+
+          // Reset scroll position when reaching the cloned section
+          if (container.scrollLeft >= track.scrollWidth / 2) {
+            container.scrollLeft = 0;
+          }
+
+          requestAnimationFrame(autoScroll);
+        }
+
+        // Start auto-scroll
+        autoScroll();
+
+        // Pause on hover
+        container.addEventListener("mouseenter", () => (scrollSpeed = 0));
+        container.addEventListener("mouseleave", () => (scrollSpeed = 1));
+      });
+
+      // MESSAGES UPLOADED SECTION
+      document.addEventListener("DOMContentLoaded", function () {
+        const galleryScroll = document.getElementById("galleryScroll");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const items = document.querySelectorAll(".gallery-item");
+
+        let currentIndex = 0;
+
+        // Set initial active item
+        updateActiveItem();
+
+        // Next button click
+        nextBtn.addEventListener("click", function () {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateActiveItem();
+        });
+
+        // Previous button click
+        prevBtn.addEventListener("click", function () {
+          currentIndex = (currentIndex - 1 + items.length) % items.length;
+          updateActiveItem();
+        });
+
+        // Handle keyboard navigation
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "ArrowDown") {
+            currentIndex = (currentIndex + 1) % items.length;
+            updateActiveItem();
+            e.preventDefault();
+          } else if (e.key === "ArrowUp") {
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+            updateActiveItem();
+            e.preventDefault();
+          }
+        });
+
+        // Update active item
+        function updateActiveItem() {
+          // Remove active class from all items
+          items.forEach((item) => item.classList.remove("active"));
+
+          // Add active class to current item
+          items[currentIndex].classList.add("active");
+        }
+
+        // Handle window resize
+        window.addEventListener("resize", function () {
+          // You may want to adjust image sizing here if needed
+        });
+      });
     </script>
     <script src="js/script.js"></script>
   </body>
